@@ -58,7 +58,7 @@ namespace CapstoneBackEnd.Controllers {
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRequestLine(int id, RequestLine requestLine) {
-            if (id != requestLine.Id) {
+            if (id != requestLine.Id || requestLine.Quantity <= 0) {
                 return BadRequest();
             }
 
@@ -69,6 +69,11 @@ namespace CapstoneBackEnd.Controllers {
             // but the old Request will not. Thus, store old reqId and also recalculate the old Request's total
             // so that both Requests will be correct.
             */
+
+            /*  BUG FOUND: 
+             *  if RequestId is changed, the new linked Request will get it's Total calculated correctly,
+             *  but the old Request will not.
+            */
             _context.Entry(requestLine).State = EntityState.Modified;
 
             try {
@@ -76,7 +81,7 @@ namespace CapstoneBackEnd.Controllers {
                 /*if (oldRequestId != requestLine.RequestId) {
                     await CalcRequestTotal(oldRequestId);
                 }*/
-                await CalcRequestTotal(requestLine.RequestId);
+            await CalcRequestTotal(requestLine.RequestId);
             } catch (DbUpdateConcurrencyException) {
                 if (!RequestLineExists(id)) {
                     return NotFound();

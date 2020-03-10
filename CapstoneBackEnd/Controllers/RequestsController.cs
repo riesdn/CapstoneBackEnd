@@ -20,9 +20,9 @@ namespace CapstoneBackEnd.Controllers {
 
         // SET REQUEST TO REVIEW
         [HttpPut("review/{id}")]
-        public async Task<IActionResult> SetToReview(int id, Request request) {
+        public async Task<IActionResult> SetToReview(int id) {
 
-            //var request = await GetRequest(id);
+            var request = await _context.Requests.FindAsync(id);
             
             if(request.Total <= 50) {
                 request.Status = "APPROVED";
@@ -35,19 +35,26 @@ namespace CapstoneBackEnd.Controllers {
 
         // SET REQUEST TO APPROVED
         [HttpPut("approve/{id}")]
-        public async Task<IActionResult> SetToApproved(int id, Request request) {
+        public async Task<IActionResult> SetToApproved(int id) {
+            var request = await _context.Requests.FindAsync(id);
             request.Status = "APPROVED";
             return await PutRequest(id, request);
         }
 
         // SET REQUEST TO REJECTED AND SET REJECTIONREASON
-        [HttpPut("reject/{id}")]
-        public async Task<IActionResult> SetToRejected(int id, Request request) {
+        [HttpPut("reject/{id}/{rejectionReason}")]
+        public async Task<IActionResult> SetToRejected(int id, string rejectionReason) {
+            var request = await _context.Requests.FindAsync(id);
             request.Status = "REJECTED";
+            request.RejectionReason = rejectionReason;
             return await PutRequest(id, request);
         }
 
         // GET REQUESTS THAT NEED REVIEWING AND ARE NOT OWNED BY CURRENT USER
+        [HttpGet("review/{currentId}")]
+        public async Task<ActionResult<IEnumerable<Request>>> GetRequestsToReview(int currentId) {
+            return await _context.Requests.Where(r => r.UserId != currentId && r.Status == "REVIEW").ToListAsync();
+        }
 
         // GET: api/Requests
         [HttpGet]
