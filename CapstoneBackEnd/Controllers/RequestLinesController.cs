@@ -81,7 +81,7 @@ namespace CapstoneBackEnd.Controllers {
                 /*if (oldRequestId != requestLine.RequestId) {
                     await CalcRequestTotal(oldRequestId);
                 }*/
-            await CalcRequestTotal(requestLine.RequestId);
+                await CalcRequestTotal(requestLine.RequestId);
             } catch (DbUpdateConcurrencyException) {
                 if (!RequestLineExists(id)) {
                     return NotFound();

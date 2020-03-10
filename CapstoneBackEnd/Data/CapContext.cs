@@ -93,5 +93,9 @@ namespace CapstoneBackEnd.Data
         public DbSet<CapstoneBackEnd.Models.Request> Requests { get; set; }
 
         public DbSet<CapstoneBackEnd.Models.RequestLine> RequestLines { get; set; }
+
+        public DbSet<CapstoneBackEnd.Models.ProductOrder> ProductOrders { get; set; }
+
+        public DbSet<CapstoneBackEnd.Models.POLine> POLines { get; set; }
     }
 }

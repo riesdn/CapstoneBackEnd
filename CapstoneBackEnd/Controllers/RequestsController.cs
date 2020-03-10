@@ -18,6 +18,14 @@ namespace CapstoneBackEnd.Controllers {
             _context = context;
         }
 
+        #region PRODUCT ORDERS
+
+        public async Task AddToProductOrder(Request request) {
+
+        }
+
+        #endregion
+
         // SET REQUEST TO REVIEW
         [HttpPut("review/{id}")]
         public async Task<IActionResult> SetToReview(int id) {
@@ -87,6 +95,9 @@ namespace CapstoneBackEnd.Controllers {
 
             try {
                 await _context.SaveChangesAsync();
+                // IF (REQUEST.STATUS == ACCEPTED) {
+                //  PUT ADDTOPRODUCTORDER(request) HERE
+                // }
             } catch (DbUpdateConcurrencyException) {
                 if (!RequestExists(id)) {
                     return NotFound();
