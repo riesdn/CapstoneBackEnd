@@ -18,6 +18,12 @@ namespace CapstoneBackEnd.Controllers {
             _context = context;
         }
 
+        // LOGIN VERIFICATION
+        [HttpGet("{username}/{password}")]
+        public async Task<ActionResult<User>> Login(string username, string password) {
+            return await _context.Users.SingleOrDefaultAsync(u => u.Username == username && u.Password == password);
+        }
+
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser() {

@@ -18,6 +18,37 @@ namespace CapstoneBackEnd.Controllers {
             _context = context;
         }
 
+        // SET REQUEST TO REVIEW
+        [HttpPut("review/{id}")]
+        public async Task<IActionResult> SetToReview(int id, Request request) {
+
+            //var request = await GetRequest(id);
+            
+            if(request.Total <= 50) {
+                request.Status = "APPROVED";
+            } else {
+                request.Status = "REVIEW";
+            }
+
+            return await PutRequest(id, request);
+        }
+
+        // SET REQUEST TO APPROVED
+        [HttpPut("approve/{id}")]
+        public async Task<IActionResult> SetToApproved(int id, Request request) {
+            request.Status = "APPROVED";
+            return await PutRequest(id, request);
+        }
+
+        // SET REQUEST TO REJECTED AND SET REJECTIONREASON
+        [HttpPut("reject/{id}")]
+        public async Task<IActionResult> SetToRejected(int id, Request request) {
+            request.Status = "REJECTED";
+            return await PutRequest(id, request);
+        }
+
+        // GET REQUESTS THAT NEED REVIEWING AND ARE NOT OWNED BY CURRENT USER
+
         // GET: api/Requests
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequest() {

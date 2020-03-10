@@ -74,6 +74,14 @@ namespace CapstoneBackEnd.Data
 
             });
 
+            model.Entity<RequestLine>(e => {
+
+                e.ToTable("RequestLines");
+                e.HasKey(e => e.Id);
+                e.Property(e => e.Quantity).HasDefaultValue(1);
+
+            });
+
         }
 
         public DbSet<CapstoneBackEnd.Models.User> Users { get; set; }
@@ -84,6 +92,6 @@ namespace CapstoneBackEnd.Data
 
         public DbSet<CapstoneBackEnd.Models.Request> Requests { get; set; }
 
-        public DbSet<CapstoneBackEnd.Models.RequestLine> RequestLine { get; set; }
+        public DbSet<CapstoneBackEnd.Models.RequestLine> RequestLines { get; set; }
     }
 }

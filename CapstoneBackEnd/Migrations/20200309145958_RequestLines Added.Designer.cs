@@ -3,14 +3,16 @@ using CapstoneBackEnd.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CapstoneBackEnd.Migrations
 {
     [DbContext(typeof(CapContext))]
-    partial class CapContextModelSnapshot : ModelSnapshot
+    [Migration("20200309145958_RequestLines Added")]
+    partial class RequestLinesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
