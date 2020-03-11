@@ -22,6 +22,10 @@ namespace CapstoneBackEnd.Controllers {
 
         public async Task AddToProductOrder(Request request) {
 
+            IEnumerable<RequestLine> requestLines = await _context.RequestLines.Where(x => x.RequestId == request.Id).ToListAsync();
+
+            
+
         }
 
         #endregion
