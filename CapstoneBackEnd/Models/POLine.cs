@@ -11,8 +11,9 @@ namespace CapstoneBackEnd.Models {
         public int ProductId { get; set; }
         public int ProductOrderId { get; set; }
         public int TotalQuantity { get; set; }
+        public decimal LineTotal { get; set; }
 
-        [JsonIgnore]
+
         public virtual ProductOrder ProductOrder { get; set; }
         [JsonIgnore]
         public virtual Product Product { get; set; }

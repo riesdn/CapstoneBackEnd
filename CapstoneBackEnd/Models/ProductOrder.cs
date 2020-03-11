@@ -11,7 +11,6 @@ namespace CapstoneBackEnd.Models {
         public int VendorId { get; set; }
         public decimal OrderTotal { get; set; }
 
-        [JsonIgnore]
         public virtual Vendor Vendor { get; set; }
         [JsonIgnore]
         public virtual IEnumerable<POLine> POLines { get; set; }

@@ -82,6 +82,22 @@ namespace CapstoneBackEnd.Data
 
             });
 
+            model.Entity<ProductOrder>(e => {
+                
+                e.ToTable("ProductOrders");
+                e.HasKey(e => e.Id);
+                e.Property(e => e.OrderTotal).HasColumnType("decimal(11,2)");
+
+            });
+
+            model.Entity<POLine>(e => {
+
+                e.ToTable("POLines");
+                e.HasKey(e => e.Id);
+                e.Property(e => e.LineTotal).HasColumnType("decimal(11,2)");
+
+            });
+
         }
 
         public DbSet<CapstoneBackEnd.Models.User> Users { get; set; }
