@@ -36,9 +36,9 @@ namespace CapstoneBackEnd.Controllers {
         }
 
         // GET: api/RequestLines
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<RequestLine>>> GetRequestLine() {
-            return await _context.RequestLines.ToListAsync();
+        [HttpGet("list/{requestId}")]
+        public async Task<ActionResult<IEnumerable<RequestLine>>> GetRequestLinesPerRequest(int requestId) {
+            return await _context.RequestLines.Where(rl => rl.RequestId == requestId).ToListAsync();
         }
 
         // GET: api/RequestLines/5
@@ -81,7 +81,7 @@ namespace CapstoneBackEnd.Controllers {
                 /*if (oldRequestId != requestLine.RequestId) {
                     await CalcRequestTotal(oldRequestId);
                 }*/
-            await CalcRequestTotal(requestLine.RequestId);
+                await CalcRequestTotal(requestLine.RequestId);
             } catch (DbUpdateConcurrencyException) {
                 if (!RequestLineExists(id)) {
                     return NotFound();

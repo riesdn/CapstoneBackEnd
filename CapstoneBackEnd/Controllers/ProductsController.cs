@@ -18,6 +18,13 @@ namespace CapstoneBackEnd.Controllers {
             _context = context;
         }
 
+        // VERIFY UNIQUE PARTNUMBER
+        // GET: api/Products/check/Echo
+        [HttpGet("check/{partNbr}")]
+        public async Task<ActionResult<Product>> CheckUsername(string partNbr) {
+            return await _context.Products.SingleOrDefaultAsync(p => p.PartNbr == partNbr);
+        }
+
         // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct() {

@@ -18,6 +18,13 @@ namespace CapstoneBackEnd.Controllers {
             _context = context;
         }
 
+        // VERIFY UNIQUE CODE
+        // GET: api/Vendors/check/Amazon
+        [HttpGet("check/{code}")]
+        public async Task<ActionResult<Vendor>> CheckUsername(string code) {
+            return await _context.Vendors.SingleOrDefaultAsync(u => u.Code == code);
+        }
+
         // GET: api/Vendors
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vendor>>> GetVendor() {

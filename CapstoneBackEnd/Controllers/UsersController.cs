@@ -19,9 +19,17 @@ namespace CapstoneBackEnd.Controllers {
         }
 
         // LOGIN VERIFICATION
+        // GET: api/Users/trashmouth/justlikebuddyholly
         [HttpGet("{username}/{password}")]
         public async Task<ActionResult<User>> Login(string username, string password) {
             return await _context.Users.SingleOrDefaultAsync(u => u.Username == username && u.Password == password);
+        }
+
+        // VERIFY UNIQUE USERNAME
+        // GET: api/Users/check/trashmouth
+        [HttpGet("check/{username}")]
+        public async Task<ActionResult<User>> CheckUsername(string username) {
+            return await _context.Users.SingleOrDefaultAsync(u => u.Username == username);
         }
 
         // GET: api/Users
